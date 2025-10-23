@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio T2e8-while2</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+        let respuesta;
+
+        do {
+            respuesta = prompt("¿Cuál fue el primer presidente de la democracia española?");
+            if (!respuesta) continue;
+            respuesta = respuesta.toLowerCase().trim();
+
+            if (respuesta === "adolfo suárez" || respuesta === "adolfo suarez") {
+                alert("Acceso permitido. ¡Bienvenido!");
+                break;
+
+            } else if (respuesta === "adolfo") {
+                alert("Te falta el apellido. ¿Cuál fue el primer presidente de la democracia española?");
+
+            } else if (respuesta === "suárez" || respuesta === "suarez") {
+                alert("Te falta el nombre. ¿Cuál fue el primer presidente de la democracia española?");
+
+            } else {
+                alert("ERROR. Inténtelo de nuevo. ¿Cuál fue el primer presidente de la democracia española?");
+            }
+
+        } while (true); 
+
+        document.write("<b>Acceso concedido.</b>");
+    </script>
+</body>
+</html>

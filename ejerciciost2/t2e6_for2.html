@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio T2e6_for2</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+        let listado = "";
+
+        document.write("Listado de horas desde las 9:00 hasta las 21:00 (cada 5 minutos)<br><br>");
+
+        for (let hora = 9; hora <= 21; hora++) {
+
+            for (let minutos = 0; minutos < 60; minutos += 5) {
+
+                if (hora === 21 && minutos > 0) {
+                    break;
+                }
+                // Formateamos los minutos para que tengan siempre dos dígitos (ej: 9:05, no 9:5)
+                let minutosTexto = minutos.toString().padStart(2, "0");
+
+                listado += hora + ":" + minutosTexto + "<br>";
+            }
+        }
+
+        document.write(listado);
+    </script>
+</body>
+</html>
