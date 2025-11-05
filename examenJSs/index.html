@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AD Castro Urdiales - Inicio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Asociación Deportiva Castro Urdiales</h1>
+    <nav>
+      <ul class="menu">
+        <li><a href="utilidades.html">Menú 1: Utilidades</a></li>
+        <li><a href="#">Menú 2</a></li>
+        <li><a href="#">Menú 3</a></li>
+        <li><a href="#">Menú 4</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="grid">
+    <aside class="left">
+      <h2>Enlaces</h2>
+      <ul>
+        <li><a href="utilidades.html">Utilidades</a></li>
+        <li><a href="#">Próximamente</a></li>
+        <li><a href="#">Próximamente</a></li>
+      </ul>
+    </aside>
+
+    <section class="center">
+      <h2>Bienvenida</h2>
+      <p>Página de inicio de la asociación.</p>
+    </section>
+
+    <aside class="right">
+      <h2>Destacados</h2>
+      <ul>
+        <li><a href="#">Próximamente</a></li>
+        <li><a href="#">Próximamente</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p><span id="year"></span> AD Castro Urdiales</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AD Castro Urdiales - Utilidades</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Asociación Deportiva Castro Urdiales</h1>
+    <nav>
+      <ul class="menu">
+        <li><a href="utilidades.html">Menú 1: Utilidades</a></li>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Menú 2</a></li>
+        <li><a href="#">Menú 3</a></li>
+        <li><a href="#">Menú 4</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="grid">
+    <aside class="left">
+      <h2>Utilidades</h2>
+      <ul>
+        <li><a href="#" onclick="calcularIMC(); return false;">Calculadora de IMC</a></li>
+        <li><a href="#" onclick="calcularFCM(); return false;">Calculadora de FCM</a></li>
+        <li><a href="#" onclick="calcularCategoria(); return false;">Calculadora de categoría</a></li>
+        <li><a href="#" onclick="generarHorario(); return false;">Horario de la asociación</a></li>
+      </ul>
+    </aside>
+
+    <section class="center">
+      <h2>Resultados</h2>
+      <div id="resultado"></div>
+    </section>
+
+    <aside class="right">
+      <h2>Ayuda</h2>
+      <p>Introduce datos válidos. Si no son correctos, se volverán a pedir.</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p><span id="year"></span> AD Castro Urdiales</p>
+  </footer>
+
+  <script src="imc.js"></script>
+  <script src="fcm.js"></script>
+  <script src="categoria.js"></script>
+  <script src="horario.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
