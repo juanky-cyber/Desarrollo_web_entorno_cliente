@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eleccion formato</title>
+</head>
+<body>
+    <h1>Elige el formato de fecha</h1>
+    <label for="formato">Selecciona un formato:</label>
+    <select id="formato">
+        <option value="ddmmaaaa">DD/MM/AAAA</option>
+        <option value="español">Miercoles,17 de febrero de 2016</option>
+        <option value="ingles">Wednesday, February 17,2016</option>
+    </select>
+    <br><br>
+    <label for="fecha">Selecciona una fecha:</label>
+    <input type="date" id="fecha">
+    <button onclick="mostrarFecha()">Mostrar Fecha</button>
+    <p id="resultado"></p>
+    <script>
+        function mostrarFecha() {
+            const formato = document.getElementById("formato").value;
+            const fechaInput = document.getElementById("fecha").value;
+            const fecha = new Date(fechaInput);
+            if (isNaN(fecha)) {
+                document.getElementById("resultado").textContent = "Por favor, ingresa una fecha válida.";
+                return;
+            }
+
+            let resultado = "";
+            const opcionesEspanol = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesIngles = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            switch (formato) {
+                case "ddmmaaaa":
+                    const dia = String(fecha.getDate()).padStart(2, '0');
+                    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+                    const anio = fecha.getFullYear();
+                    resultado = `${dia}/${mes}/${anio}`;
+                    break;
+                case "español":
+                    resultado = fecha.toLocaleDateString('es-ES', opcionesEspanol);
+                    break;
+                case "ingles":
+                    resultado = fecha.toLocaleDateString('en-US', opcionesIngles);
+                    break;
+                default:
+                    resultado = "Formato no reconocido.";
+            }
+
+            document.getElementById("resultado").textContent = resultado;
+        }
+    </script>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 5 - Math</title>
+</head>
+<body>
+  <h1>Ejercicio 5: Operaciones Matemáticas</h1>
+
+  <p>Elige una opción del menú:</p>
+  <ul>
+    <li><strong>1</strong> → Potencia</li>
+    <li><strong>2</strong> → Raíz cuadrada</li>
+    <li><strong>3</strong> → Redondeo</li>
+    <li><strong>4</strong> → Trigonometría</li>
+  </ul>
+
+  <input type="number" id="opcion" placeholder="Escribe 1, 2, 3 o 4">
+  <button onclick="calcular()">Calcular</button>
+
+  <h2 id="resultado"></h2>
+
+  <script>
+    function calcular() {
+      const opcion = parseInt(document.getElementById("opcion").value);
+      const resultado = document.getElementById("resultado");
+
+      switch (opcion) {
+        case 1: 
+          let base = parseFloat(prompt("Introduce la base:"));
+          let exponente = parseFloat(prompt("Introduce el exponente:"));
+          let potencia = Math.pow(base, exponente);
+          resultado.innerHTML = `La potencia de ${base} elevado a ${exponente} es: <strong>${potencia}</strong>`;
+          break;
+
+        case 2: 
+          let numero = parseFloat(prompt("Introduce un número (no negativo):"));
+          if (numero < 0) {
+            resultado.textContent = "No se puede calcular la raíz de un número negativo.";
+          } else {
+            let raiz = Math.sqrt(numero);
+            resultado.innerHTML = `La raíz cuadrada de ${numero} es: <strong>${raiz}</strong>`;
+          }
+          break;
+
+        case 3: 
+          let decimal = parseFloat(prompt("Introduce un número decimal:"));
+          let redondeoNormal = Math.round(decimal);
+          let redondeoArriba = Math.ceil(decimal);
+          let redondeoAbajo = Math.floor(decimal);
+          resultado.innerHTML = `
+            <p>Redondeo normal: <strong>${redondeoNormal}</strong></p>
+            <p>Redondeo al alza: <strong>${redondeoArriba}</strong></p>
+            <p>Redondeo a la baja: <strong>${redondeoAbajo}</strong></p>
+          `;
+          break;
+
+        case 4: 
+          let angulo = parseFloat(prompt("Introduce un ángulo (0 a 360):"));
+          if (angulo < 0 || angulo > 360) {
+            resultado.textContent = "El ángulo debe estar entre 0 y 360 grados.";
+          } else {
+            let radianes = angulo * (Math.PI / 180);
+            let seno = Math.sin(radianes).toFixed(4);
+            let coseno = Math.cos(radianes).toFixed(4);
+            let tangente = Math.tan(radianes).toFixed(4);
+            resultado.innerHTML = `
+              <p>Para el ángulo ${angulo}°:</p>
+              <p>Seno: <strong>${seno}</strong></p>
+              <p>Coseno: <strong>${coseno}</strong></p>
+              <p>Tangente: <strong>${tangente}</strong></p>
+            `;
+          }
+          break;
+
+        default:
+          resultado.textContent = "Por favor, introduce una opción válida (1 a 4).";
+      }
+    }
+  </script>
+</body>
+</html>

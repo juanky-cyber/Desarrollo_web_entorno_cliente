@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 7 - Number</title>
+</head>
+<body>
+  <h1>Ejercicio 7: Formatos del objeto Number</h1>
+
+  <p>Introduce un número entero:</p>
+  <input type="number" id="numero" placeholder="Ejemplo: 50">
+  <button onclick="mostrarFormatos()">Mostrar formatos</button>
+
+  <h2>Resultados:</h2>
+  <div id="resultado"></div>
+
+  <script>
+    function mostrarFormatos() {
+      const valor = parseInt(document.getElementById("numero").value);
+      const resultado = document.getElementById("resultado");
+
+      if (isNaN(valor)) {
+        resultado.textContent = "Por favor, introduce un número entero válido.";
+        return;
+      }
+
+
+      const exponencial = valor.toExponential();       
+      const conDecimales = valor.toFixed(4);          
+      const binario = valor.toString(2).padStart(8, "0");  
+      const octal = valor.toString(8);                 
+      const hexadecimal = "0x" + valor.toString(16);   
+
+      resultado.innerHTML = `
+        <p><strong>Valor exponencial:</strong> ${exponencial}</p>
+        <p><strong>Con 4 decimales:</strong> ${conDecimales}</p>
+        <p><strong>Binario:</strong> ${binario}</p>
+        <p><strong>Octal:</strong> ${octal}</p>
+        <p><strong>Hexadecimal:</strong> ${hexadecimal}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
