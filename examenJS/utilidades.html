@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AD Castro Urdiales - Utilidades</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Asociación Deportiva Castro Urdiales</h1>
+
+    <nav>
+      <ul class="menu">
+        <li><a href="utilidades.html">Menú 1: Utilidades</a></li>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Menú 2</a></li>
+        <li><a href="#">Menú 3</a></li>
+        <li><a href="#">Menú 4</a></li>
+      </ul>
+    </nav>
+
+    <div class="mini-calendario">
+      <div id="cal-diaSemana"></div>
+      <div id="cal-diaMes"></div>
+      <div id="cal-mesAnio"></div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <aside class="left">
+      <h2>Utilidades</h2>
+      <ul>
+        <li><a href="#" onclick="calcularIMC(); return false;">Calculadora de IMC</a></li>
+        <li><a href="#" onclick="calcularFCM(); return false;">Calculadora de FCM</a></li>
+        <li><a href="#" onclick="calcularCategoria(); return false;">Calculadora de categoría</a></li>
+        <li><a href="#" onclick="generarHorario(); return false;">Horario de la asociación</a></li>
+        <li><a href="#" onclick="comprobarContrasena(); return false;">Comprobar contraseña</a></li>
+      </ul>
+    </aside>
+
+    <section class="center">
+      <h2>Resultados</h2>
+      <div id="resultado"></div>
+    </section>
+
+    <aside class="right">
+      <h2>Ayuda</h2>
+      <p>Introduce datos válidos. Si no lo son, el sistema volverá a pedirlos.</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>
+      <span id="year"></span> Asociación Deportiva Castro Urdiales.
+      Web desarrollada por: Juan Carlos Gea Alias.
+      <a href="#" onclick="abrirAvisoLegal(); return false;">Aviso legal</a>
+    </p>
+  </footer>
+
+  <script src="imc.js"></script>
+  <script src="fcm.js"></script>
+  <script src="categoria.js"></script>
+  <script src="horario.js"></script>
+  <script src="t3ej9_contrasena.js"></script>
+
+  <script>
+    function abrirAvisoLegal() {
+      window.open(
+        'aviso-legal.html',
+        'avisoLegal',
+        'width=600,height=400,toolbar=no,menubar=no,location=no,status=no,scrollbars=no,resizable=no'
+      );
+    }
+
+    function actualizarCalendario() {
+      const ahora = new Date();
+      const diaSemana = ahora.toLocaleDateString('es-ES', { weekday: 'long' });
+      const mesAnio = ahora.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+
+      const elDiaSemana = document.getElementById('cal-diaSemana');
+      const elDiaMes = document.getElementById('cal-diaMes');
+      const elMesAnio = document.getElementById('cal-mesAnio');
+
+      if (elDiaSemana && elDiaMes && elMesAnio) {
+        elDiaSemana.textContent = diaSemana;
+        elDiaMes.textContent = ahora.getDate();
+        elMesAnio.textContent = mesAnio;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const spanYear = document.getElementById('year');
+      if (spanYear) spanYear.textContent = new Date().getFullYear();
+
+      actualizarCalendario();
+    });
+  </script>
+</body>
+</html>
