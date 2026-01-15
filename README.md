@@ -16,7 +16,6 @@ Contiene las prácticas base de JavaScript y ejercicios por temas.
 - `Tema 3/`
 - `Tema 4/`
 
----
 
 ### ✅ 2º Trimestre
 Contiene prácticas de eventos/formularios y el bloque de **React**.
