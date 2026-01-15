@@ -1,0 +1,12 @@
+.text-lowercase {
+  text-transform: lowercase;
+  color: blue;
+}
+.dev {
+  color: green;
+  font-weight: bold;
+}
+
+.other {
+  color: gray;
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>t5e4_expresionesregulares</title>
+  <style>
+    label { display:block; margin-top:10px; }
+    input { padding:6px; width: 320px; }
+    .error { border: 2px solid red; }
+  </style>
+</head>
+
+<body>
+  <h2>Control de bolsas</h2>
+
+  <form id="formBolsas">
+    <label>Fecha (dd/mm/aaaa) *
+      <input type="text" id="fecha" placeholder="23/01/2008">
+    </label>
+
+    <label>Cocinero (WW$1234)
+      <input type="text" id="cocinero" placeholder="WW$1234">
+    </label>
+
+    <label>Destinatario (NM_alburquerque:1234)
+      <input type="text" id="dest" placeholder="NM_alburquerque:1234">
+    </label>
+
+    <label>Gramos (100 a 5000)
+      <input type="number" id="gramos" placeholder="500">
+    </label>
+
+    <label>Composición (200gC3OH7)
+      <input type="text" id="comp" placeholder="200gC3OH7">
+    </label>
+
+    <label>Cuenta EEUU (LLDD-12dig-CCCC)
+      <input type="text" id="cuenta" placeholder="WW46-123456789012-0304">
+    </label>
+
+    <label>Cuenta sin guiones (se rellena si es correcta)
+      <input type="text" id="cuentaLimpia" readonly>
+    </label>
+
+    <br>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <script>
+    window.onload = function () {
+      document.getElementById("formBolsas").addEventListener("submit", validarTodo);
+    };
+
+    function validarTodo(e) {
+      limpiarErrores();
+
+      let ok = true;
+
+      if (!validarFecha()) ok = false;
+      if (!validarCocinero()) ok = false;
+      if (!validarDestinatario()) ok = false;
+      if (!validarGramos()) ok = false;
+      if (!validarComposicion()) ok = false;
+      if (!validarCuentaUSA()) ok = false;
+
+      if (!ok) e.preventDefault();
+    }
+
+    function limpiarErrores() {
+      document.querySelectorAll("input").forEach(inp => inp.classList.remove("error"));
+      document.getElementById("cuentaLimpia").value = "";
+    }
+
+    function validarFecha() {
+      const fecha = document.getElementById("fecha");
+      const v = fecha.value.trim();
+
+      const re = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+      const m = v.match(re);
+      if (!m) return marcarError(fecha);
+
+      const dd = Number(m[1]), mm = Number(m[2]), aa = Number(m[3]);
+      const d = new Date(aa, mm - 1, dd);
+      const real = d.getFullYear() === aa && d.getMonth() === (mm - 1) && d.getDate() === dd;
+
+      if (!real) return marcarError(fecha);
+      return true;
+    }
+
+    function validarCocinero() {
+      const cocinero = document.getElementById("cocinero");
+      const v = cocinero.value.trim();
+
+      const re = /^[A-Z]{2}[^A-Za-z0-9\s]\d{4}$/;
+      if (!re.test(v)) return marcarError(cocinero);
+      return true;
+    }
+
+    function validarDestinatario() {
+      const dest = document.getElementById("dest");
+      const v = dest.value.trim();
+
+      const re = /^[A-Z]{2,3}_[a-z]+:\d{4}$/;
+      if (!re.test(v)) return marcarError(dest);
+      return true;
+    }
+
+    function validarGramos() {
+      const gramos = document.getElementById("gramos");
+      const v = Number(gramos.value);
+
+      if (!Number.isFinite(v) || v < 100 || v > 5000) return marcarError(gramos);
+      return true;
+    }
+
+    function validarComposicion() {
+      const comp = document.getElementById("comp");
+      const v = comp.value.trim();
+
+      const re = /^\d+g[A-Za-z]{1,2}\d?[A-Za-z]{1,2}\d?$/;
+      if (!re.test(v)) return marcarError(comp);
+      return true;
+    }
+
+    function validarCuentaUSA() {
+      const cuenta = document.getElementById("cuenta");
+      const limpia = document.getElementById("cuentaLimpia");
+      const v = cuenta.value.trim();
+
+      const re = /^([A-Z]{2})(\d{2})-(\d{12})-(\d{4})$/;
+      const m = v.match(re);
+      if (!m) return marcarError(cuenta);
+
+      const letras = m[1];
+      const dd = m[2];
+      const num12 = m[3];
+      const ctrl = m[4];
+
+      const suma = valorLetra(letras[0]) + valorLetra(letras[1]);
+      const ddEsperado = String(suma).padStart(2, "0");
+      if (dd !== ddEsperado) return marcarError(cuenta);
+
+      const suma1 = sumarDigitos(num12.slice(0, 6));
+      const suma2 = sumarDigitos(num12.slice(6, 12));
+
+      const c1 = String(Math.floor(suma1 / 6)).padStart(2, "0");
+      const c2 = String(Math.floor(suma2 / 6)).padStart(2, "0");
+
+      const ctrlEsperado = c1 + c2;
+      if (ctrl !== ctrlEsperado) return marcarError(cuenta);
+
+      limpia.value = letras + dd + num12 + ctrl;
+      return true;
+    }
+
+    function valorLetra(ch) {
+      return ch.charCodeAt(0) - 64;
+    }
+
+    function sumarDigitos(texto6) {
+      let suma = 0;
+      for (let i = 0; i < texto6.length; i++) {
+        suma += Number(texto6[i]);
+      }
+      return suma;
+    }
+
+    function marcarError(input) {
+      input.classList.add("error");
+      input.focus();
+      return false;
+    }
+  </script>
+</body>
+</html>
