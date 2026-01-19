@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AD Castro Urdiales - Inicio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Asociación Deportiva Castro Urdiales</h1>
+
+    <nav>
+      <ul class="menu">
+        <li><a href="utilidades.html">Menú 1: Utilidades</a></li>
+        <li><a href="#">Menú 2</a></li>
+        <li><a href="#">Menú 3</a></li>
+        <li><a href="#">Menú 4</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mini calendario -->
+    <div class="mini-calendario">
+      <div id="cal-diaSemana"></div>
+      <div id="cal-diaMes"></div>
+      <div id="cal-mesAnio"></div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <aside class="left">
+      <h2>Enlaces</h2>
+      <ul>
+        <li><a href="utilidades.html">Utilidades</a></li>
+        <li><a href="#">Próximamente</a></li>
+        <li><a href="#">Próximamente</a></li>
+      </ul>
+    </aside>
+
+    <section class="center">
+      <h2>Bienvenida</h2>
+      <p>Página de inicio de la asociación.</p>
+    </section>
+
+    <aside class="right">
+      <h2>Destacados</h2>
+      <ul>
+        <li><a href="#">Próximamente</a></li>
+        <li><a href="#">Próximamente</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>
+      <span id="year"></span> Asociación Deportiva Castro Urdiales.</span>
+      <br>
+      <a>Web desarrollada por: Juan Carlos Gea Alias.</a>
+      <br>
+      <a href="#" onclick="abrirAvisoLegal(); return false;">Aviso legal</a>
+    </p>
+  </footer>
+
+  <script>
+    function abrirAvisoLegal() {
+      window.open(
+        'aviso-legal.html',
+        'avisoLegal',
+        'width=600,height=400,toolbar=no,menubar=no,location=no,status=no,scrollbars=no,resizable=no'
+      );
+    }
+
+    function mostrarBienvenida() {
+      const ventana = window.open(
+        '',
+        'bienvenida',
+        'width=400,height=200,toolbar=no,menubar=no,location=no,status=no,scrollbars=no,resizable=no'
+      );
+
+      if (!ventana) return;
+
+      ventana.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+          <meta charset="UTF-8">
+          <title>Bienvenido</title>
+          <link rel="stylesheet" href="styles.css">
+        </head>
+        <body class="popup-bienvenida">
+          <p>Bienvenido/a a la web de la Asociación Deportiva Castro Urdiales.</p>
+          <button onclick="window.close()">Cerrar</button>
+        </body>
+        </html>
+      `);
+      ventana.document.close();
+    }
+
+    function actualizarCalendario() {
+      const ahora = new Date();
+
+      const opcionesDia = { weekday: 'long' };
+      const opcionesMesAnio = { month: 'long', year: 'numeric' };
+
+      const diaSemana = ahora.toLocaleDateString('es-ES', opcionesDia);
+      const diaMes = ahora.getDate();
+      const mesAnio = ahora.toLocaleDateString('es-ES', opcionesMesAnio);
+
+      const elDiaSemana = document.getElementById('cal-diaSemana');
+      const elDiaMes = document.getElementById('cal-diaMes');
+      const elMesAnio = document.getElementById('cal-mesAnio');
+
+      if (elDiaSemana && elDiaMes && elMesAnio) {
+        elDiaSemana.textContent = diaSemana;
+        elDiaMes.textContent = diaMes;
+        elMesAnio.textContent = mesAnio;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const spanYear = document.getElementById('year');
+      if (spanYear) spanYear.textContent = new Date().getFullYear();
+
+      actualizarCalendario();
+
+      setTimeout(mostrarBienvenida, 10000);
+    });
+  </script>
+
+</body>
+</html>

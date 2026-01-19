@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cumpleaños</title>
+</head>
+<body>
+
+  <h1>¿Dame la fecha de tu cumpleaños?</h1>
+  
+  <label for="fechaNacimiento">Selecciona tu fecha de nacimiento:</label>
+  <input type="date" id="fechaNacimiento">
+  <button onclick="calcularDomingos()">Calcular los cumpleaños que caerán en domingo hasta 2100</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularDomingos() {
+      const fechaNacimiento = new Date(document.getElementById("fechaNacimiento").value);
+      if (isNaN(fechaNacimiento)) {
+        document.getElementById("resultado").textContent = "Por favor, ingresa una fecha válida.";
+        return;
+      }
+
+      const mesNacimiento = fechaNacimiento.getMonth(); 
+      const diaNacimiento = fechaNacimiento.getDate();
+      const anioActual = new Date().getFullYear();
+      let domingos = [];
+
+      for (let año = anioActual; año <= 2100; año++) {
+        const cumpleanos = new Date(año, mesNacimiento, diaNacimiento);
+        if (cumpleanos.getDay() === 0) { 
+          domingos.push(año);
+        }
+      }
+
+      const resultado = document.getElementById("resultado");
+      if (domingos.length > 0) {
+        resultado.textContent =
+          "Tus cumpleaños que caen en domingo hasta 2100 son: " + domingos.join(", ");
+      } else {
+        resultado.textContent =
+          "No hay cumpleaños que caigan en domingo hasta 2100.";
+      }
+    }
+  </script>
+
+</body>
+</html>

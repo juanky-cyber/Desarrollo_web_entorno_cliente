@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio T2e5-for</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+        let listado = "";
+
+        let horaEnPunto = true;
+
+        document.write("Listado de horas desde las 9:00 hasta las 21:30<br><br>");
+
+        for (let hora = 9; hora <= 21; hora++) {
+
+            if (horaEnPunto) {
+                listado += hora + ":00<br>";
+                horaEnPunto = false;
+            }
+
+            if (!horaEnPunto && hora < 21) {
+                listado += hora + ":30<br>";
+                horaEnPunto = true;             
+            }
+        }
+        document.write(listado);
+    </script>
+</body>
+</html>

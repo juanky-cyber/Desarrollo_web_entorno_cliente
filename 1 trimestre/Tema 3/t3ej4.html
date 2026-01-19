@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 4 - Formato de horas</title>
+</head>
+<body>
+  <h1>Ejercicio 4: Formato de horas</h1>
+
+  <p>Introduce el formato deseado:</p>
+  <ul>
+    <li><strong>1</strong> → 14:35:07</li>
+    <li><strong>2</strong> → 02:35:07 PM</li>
+  </ul>
+
+  <input type="number" id="opcion" placeholder="Escribe 1 o 2">
+  <button onclick="mostrarHora()">Mostrar hora</button>
+
+  <h2 id="resultado"></h2>
+
+  <script>
+    function mostrarHora() {
+      const opcion = document.getElementById("opcion").value;
+      const resultado = document.getElementById("resultado");
+
+      const ahora = new Date();
+      let horas = ahora.getHours();
+      let minutos = ahora.getMinutes();
+      let segundos = ahora.getSeconds();
+
+      if (horas < 10) horas = "0" + horas;
+      if (minutos < 10) minutos = "0" + minutos;
+      if (segundos < 10) segundos = "0" + segundos;
+
+      if (opcion == 1) {
+        resultado.textContent = `${horas}:${minutos}:${segundos}`;
+      } 
+      else if (opcion == 2) {
+        let horas12 = ahora.getHours();
+        let sufijo = "AM";
+
+        if (horas12 >= 12) {
+          sufijo = "PM";
+          if (horas12 > 12) horas12 -= 12;
+        }
+        if (horas12 === 0) horas12 = 12;
+
+
+        if (horas12 < 10) horas12 = "0" + horas12;
+
+        resultado.textContent = `${horas12}:${minutos}:${segundos} ${sufijo}`;
+      } 
+      else {
+        resultado.textContent = "Introduce 1 o 2 para elegir el formato.";
+      }
+    }
+  </script>
+</body>
+</html>

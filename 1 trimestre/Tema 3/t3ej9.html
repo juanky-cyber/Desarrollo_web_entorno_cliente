@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 9 - Contraseña Segura</title>
+</head>
+<body>
+  <h1>Ejercicio 9: Comprobador de Contraseña</h1>
+
+  <p>Introduce una contraseña para comprobar si es segura:</p>
+  <input type="password" id="password" placeholder="Escribe tu contraseña">
+  <button onclick="validarContrasena()">Comprobar</button>
+
+  <h2>Resultado:</h2>
+  <div id="resultado"></div>
+
+  <script>
+    function validarContrasena() {
+      const contrasena = document.getElementById("password").value.trim();
+      const resultado = document.getElementById("resultado");
+
+      // Requisitos
+      const tieneMayuscula = /[A-Z]/.test(contrasena);
+      const tieneMinuscula = /[a-z]/.test(contrasena);
+      const tieneNumero = /[0-9]/.test(contrasena);
+      const tieneEspecial = /[-_@#$%&]/.test(contrasena);
+      const longitudValida = contrasena.length >= 8 && contrasena.length <= 16;
+
+      // Comprobación general
+      if (tieneMayuscula && tieneMinuscula && tieneNumero && tieneEspecial && longitudValida) {
+        resultado.innerHTML = `
+          <p style="color:green; font-weight:bold;"> Contraseña segura</p>
+        `;
+      } else {
+        resultado.innerHTML = `
+          <p style="color:red; font-weight:bold;"> Contraseña no segura</p>
+          <ul>
+            <li>${longitudValida ? "Si tiene" : "No tiene"} Entre 8 y 16 caracteres</li>
+            <li>${tieneMayuscula ? "Si tiene" : "No tiene"} Contiene mayúscula</li>
+            <li>${tieneMinuscula ? "Si tiene" : "No tiene"} Contiene minúscula</li>
+            <li>${tieneNumero ? "Si tiene" : "No tiene"} Contiene número</li>
+            <li>${tieneEspecial ? "Si tiene" : "No tiene"} Contiene símbolo (- _ @ # $ % &)</li>
+          </ul>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

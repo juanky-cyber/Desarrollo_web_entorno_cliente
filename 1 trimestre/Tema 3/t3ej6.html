@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 6 - Círculo y Esfera</title>
+</head>
+<body>
+  <h1>Ejercicio 6: Cálculos con el radio</h1>
+
+  <p>Introduce el valor del radio (en cm):</p>
+  <input type="number" id="radio" placeholder="Ejemplo: 5" step="any">
+  <button onclick="calcular()">Calcular</button>
+
+  <h2>Resultados:</h2>
+  <div id="resultado"></div>
+
+  <script>
+    function calcular() {
+      const r = parseFloat(document.getElementById("radio").value);
+      const resultado = document.getElementById("resultado");
+
+      if (isNaN(r) || r <= 0) {
+        resultado.textContent = "Por favor, introduce un valor válido para el radio.";
+        return;
+      }
+
+      const pi = Math.PI; 
+
+      const diametro = 2 * r;
+      const perimetro = 2 * pi * r;
+      const areaCirculo = pi * Math.pow(r, 2);
+      const areaEsfera = 4 * pi * Math.pow(r, 2);
+      const volumenEsfera = (4 / 3) * pi * Math.pow(r, 3);
+
+      resultado.innerHTML = `
+        <p><strong>Radio:</strong> ${r.toFixed(2)} cm</p>
+        <p><strong>Diámetro:</strong> ${diametro.toFixed(2)} cm</p>
+        <p><strong>Perímetro (circunferencia):</strong> ${perimetro.toFixed(2)} cm</p>
+        <p><strong>Área del círculo:</strong> ${areaCirculo.toFixed(2)} cm²</p>
+        <p><strong>Área de la esfera:</strong> ${areaEsfera.toFixed(2)} cm²</p>
+        <p><strong>Volumen de la esfera:</strong> ${volumenEsfera.toFixed(2)} cm³</p>
+      `;
+    }
+  </script>
+</body>
+</html>
