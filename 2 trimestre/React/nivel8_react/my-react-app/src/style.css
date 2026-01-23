@@ -1,0 +1,16 @@
+.paragraph-text {
+  font-size: 18px;
+  color:red;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.paragraph-text:hover {
+  color: #111;
+  transform: scale(1.02);
+}
+
+@media (max-width: 500px) {
+  .paragraph-text {
+    font-size: 14px;
+  }
+}
