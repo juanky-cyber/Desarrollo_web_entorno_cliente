@@ -45,6 +45,9 @@ Desarrollo_web_entorno_cliente/
 │     ├─ nivel1_react/
 │     ├─ nivel2_react/
 │     ├─ nivel3_react/
-|     └─ nivel4_react/
+│     ├─ nivel4_react/
+│     ├─ nivel5_react/
+│     ├─ nivel6_react/
+|     └─ nivel7_react/
 |
 └─ README.md
