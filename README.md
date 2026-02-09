@@ -41,6 +41,9 @@ Desarrollo_web_entorno_cliente/
 │  └─ Tema 4/
 │
 ├─ 2 trimestre/
+│  ├─ EjerciciosAplicacion/
+│     ├─ Ejercicio 1 - Floristeria/
+│     └─ Ejercicio 2 - One Piece/
 │  ├─ Eventos y formularios/
 │  └─ React/
 │     ├─ nivel1_react/
