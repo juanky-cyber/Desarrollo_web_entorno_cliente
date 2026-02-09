@@ -21,6 +21,7 @@ Contiene las prácticas base de JavaScript y ejercicios por temas.
 Contiene prácticas de eventos/formularios y el bloque de **React**.
 
 **Contenido actual:**
+- `EjerciciosAplicacion`
 - `Eventos y formularios/`
 - `React/`
 
